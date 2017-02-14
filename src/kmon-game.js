@@ -1,3 +1,3 @@
 var kmonGame = {};
 
-export default kmonGame;
+module.exports = kmonGame;
