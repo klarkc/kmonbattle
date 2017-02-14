@@ -1,3 +1,3 @@
 var kmonGame = {};
 
-module.exports = kmonGame;
+define(kmonGame);

@@ -1,3 +1,5 @@
-const kmonGame =  require('./kmon-game.js');
+const components = ["./src/kmon-game.js"];
 
-customElements.define('kmon-game', kmonGame);
+requirejs(components, function(kmonGame) {
+  customElements.define('kmon-game', kmonGame);
+});
