@@ -2,7 +2,7 @@ class KmonGame extends HTMLElement {
   constructor() {
     super(); // by spec
 
-    document.addEventListener('components-ready', this._createGame);
+    window.addEventListener('components-ready', this._createGame.bind(this));
   }
 
   _createGame() {
