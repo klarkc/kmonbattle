@@ -1,6 +1,7 @@
 const assert = require('chai').assert;
 const jsdom = require('jsdom');
 const path = require('path');
+const util = require('./util.js');
 
 suite('loader tests', function() {
   test('loader should fire components-ready event', function() {
@@ -9,7 +10,7 @@ suite('loader tests', function() {
       jsdom.env({
         file: path.resolve(__dirname, '../index.html'),
         scripts: [
-          path.resolve(__dirname, '../bower_components/custom-elements/custom-elements.min.js'),
+          util.customElementsPath(),
           path.resolve(__dirname, '../src/loader.js'),
         ],
         created: (err, window) => {
