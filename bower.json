@@ -21,6 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "requirejs": "^2.3.2"
+    "requirejs": "^2.3.2",
+    "custom-elements": "webcomponents/custom-elements#^1.0.0-alpha.4"
   }
 }

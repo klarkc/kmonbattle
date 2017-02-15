@@ -10,5 +10,5 @@ requirejs(components, function(KmonGame, PokeSearch, PokePlayer) {
   window.customElements.define('poke-player', PokePlayer);
 
   // Ready to go
-  document.dispatchEvent(new CustomEvent('components-ready'));
+  window.dispatchEvent(new CustomEvent('components-ready'));
 });
