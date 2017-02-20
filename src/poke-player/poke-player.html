@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../poke-monster/poke-monster.html">
+
 <dom-module id="poke-player">
   <template>
     <style>
@@ -8,8 +10,8 @@
         flex-direction: column;
       }
     </style>
-    <poke-monster></poke-monster>
     <poke-status></poke-status>
+    <poke-monster pokemon-id="1"></poke-monster>
   </template>
 
   <script>
