@@ -30,14 +30,6 @@
           assert.equal(element.is, 'poke-player');
         });
 
-        test('should show an dialog to ask nickname', function(done) {
-          element.askNickname();
-          flush(function() {
-            assert.isTrue(element.$.nicknameDlg.opened);
-            done();
-          });
-        });
-
       });
     </script>
   </body>
