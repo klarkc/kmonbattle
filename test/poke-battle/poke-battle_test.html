@@ -8,18 +8,18 @@
     <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../../src/poke-app/poke-app.html">
+    <link rel="import" href="../../src/poke-battle/poke-battle.html">
   </head>
   <body>
 
     <test-fixture id="basic">
       <template>
-        <poke-app></poke-app>
+        <poke-battle></poke-battle>
       </template>
     </test-fixture>
 
     <script>
-      suite('poke-app', function() {
+      suite('poke-battle', function() {
         var element;
         setup (function() {
           element = fixture('basic');
@@ -27,11 +27,7 @@
 
         test('instantiating the element works', function() {
           var element = fixture('basic');
-          assert.equal(element.is, 'poke-app');
-        });
-
-        test('poke-app should have a poke-battle element', function() {
-          assert.equal(element.querySelector('poke-battle').is, 'poke-battle');
+          assert.equal(element.is, 'poke-battle');
         });
 
       });

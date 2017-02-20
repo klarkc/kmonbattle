@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../poke-battle/poke-battle.html">
+
 <dom-module id="poke-app">
   <template>
     <style>
@@ -7,20 +9,17 @@
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]</h2>
+    <poke-battle>
+      <poke-player id="player1"></poke-player>
+      <poke-player id="player2"></poke-player>
+      <poke-log></poke-log>
+    </poke-battle>
   </template>
 
   <script>
     Polymer({
 
-      is: 'poke-app',
-
-      properties: {
-        prop1: {
-          type: String,
-          value: 'poke-app',
-        },
-      },
+      is: 'poke-app'
 
     });
   </script>
