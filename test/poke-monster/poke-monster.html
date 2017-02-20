@@ -2,24 +2,24 @@
 
 <html>
   <head>
-    <title>poke-battle test</title>
+    <title>poke-monster test</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../../src/poke-battle/poke-battle.html">
+    <link rel="import" href="../../src/poke-monster/poke-monster.html">
   </head>
   <body>
 
     <test-fixture id="basic">
       <template>
-        <poke-battle></poke-battle>
+        <poke-monster></poke-monster>
       </template>
     </test-fixture>
 
     <script>
-      suite('poke-battle', function() {
+      suite('poke-monster', function() {
         var element;
         setup (function() {
           element = fixture('basic');
@@ -27,11 +27,7 @@
 
         test('instantiating the element works', function() {
           var element = fixture('basic');
-          assert.equal(element.is, 'poke-battle');
-        });
-
-        test('apiUrl should be right', function() {
-          assert.equal(element.apiUrl, 'http://pokeapi.co/api/v2');
+          assert.equal(element.is, 'poke-monster');
         });
 
       });
