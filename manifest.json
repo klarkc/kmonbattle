@@ -1,0 +1,7 @@
+{
+  "name": "kmonbattle",
+  "short_name": "kmonbattle",
+  "description": "Pokemon battle game for browsers",
+  "start_url": "/",
+  "display": "standalone"
+}
