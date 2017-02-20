@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../poke-player/poke-player.html">
+
 <dom-module id="poke-battle">
   <template>
     <style>
@@ -12,7 +14,13 @@
   <script>
     Polymer({
 
-      is: 'poke-battle'
+      is: 'poke-battle',
+      properties: {
+        apiUrl: {
+          type: String,
+          value: 'http://pokeapi.co/api/v2'
+        }
+      }
 
     });
   </script>

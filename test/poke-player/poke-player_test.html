@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>poke-app test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../../src/poke-player/poke-player.html">
+  </head>
+  <body>
+
+    <test-fixture id="basic">
+      <template>
+        <poke-player></poke-player>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('poke-player', function() {
+        var element;
+        setup (function() {
+          element = fixture('basic');
+        });
+
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'poke-player');
+        });
+
+        test('should show an dialog to ask nickname', function(done) {
+          element.askNickname();
+          flush(function() {
+            assert.isTrue(element.$.nicknameDlg.opened);
+            done();
+          });
+        });
+
+      });
+    </script>
+  </body>
+</html>
