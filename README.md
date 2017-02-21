@@ -2,6 +2,8 @@
 
 Pokemon battle game for browsers
 
+[Link to planning diagrams](https://www.draw.io/?chrome=0&lightbox=1&highlight=0000ff&edit=_blank&layers=1&title=kmonbattle.html#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D0ByrzRxm4slOIbUZ3MVlmSmZ2OG8%26export%3Ddownload)
+
 ## Install the Polymer-CLI
 
 First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
