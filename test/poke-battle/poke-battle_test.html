@@ -25,58 +25,88 @@
           element = fixture('basic');
         });
 
-        test('instantiating the element works', function() {
-          var element = fixture('basic');
-          assert.equal(element.is, 'poke-battle');
+        suite('element instantiating', function() {
+          test('instantiating the element works', function() {
+            var element = fixture('basic');
+            assert.equal(element.is, 'poke-battle');
+          });
+
+          test('apiUrl should be right', function() {
+            assert.equal(element.apiUrl, 'http://pokeapi.co/api/v2');
+          });
+
+          test('battle-stage should be 0', function() {
+            assert.equal(element.battleStage, 0);
+          });
+
+          test.skip('should have poke-search element');
+          test.skip('should have poke-log element');
+          test.skip('should have poke-menu element');
+          test.skip('should have player poke-player element');
+          test.skip('should have enemy poke-player element');
+          test.skip('should have poke-search element');
+          test.skip('should create a poke-battleside for each player');
         });
 
-        test('apiUrl should be right', function() {
-          assert.equal(element.apiUrl, 'http://pokeapi.co/api/v2');
+        suite('messages', function() {
+          test.skip('should log: player/enemy sent out pokemonName!');
+          test.skip('should log: Go! pokemonName!');
+          test.skip('should log: pokemonName used moveName!');
+          test.skip('should log: Enemy pokemonName fainted! when a pokemon dies');
+          test.skip('should log: pokemonName used moveName when a move is triggered');
+          test.skip('should log: It\'s super effective! when the move is super effective');
+          test.skip('should log: It\'s not very effective... when the move is not effective');
+          test.skip('should log: But, it failed! when the move fails');
+          test.skip('should log: critical hit! when the move crits');
+          test.skip('should log: pokemonName attack missed! when the move miss');
+          test.skip('should log: pokemonName restored life! when the move restore hp');
+          test.skip('should log: pokemonName gained statusName! when the move grants self status');
+          test.skip('should log: Enemy pokemonName statusName fell! when the move remove enemy status');
+          test.skip('should log: Enemy pokemonName paralyzed! It may\nnot attack! when the move paralyzes enemy');
+          test.skip('should log: pokemonName paralyzed! It may\nnot attack! when the move paralyzes enemy');
+          test.skip('should log question: enemyName is about to use pokeName\nWill playerName change pokemon?');
+          test.skip('should log question: enemyName defeated playerName! when player lose');
+          test.skip('should log question: playerName defeated enemyName! when player wins');
         });
 
-        test.skip('should have poke-search element');
+        test.skip('should configure the battle after ready');
+        test.skip('should show poke-search on configure');
 
-        test.skip('should have poke-log element');
+        suite('actions for poke-search(pokemons-picked) event', function() {
+          test.skip('should hide poke-search');
+          test.skip('should update both poke-player\'s slots with picked pokemons');
+          test.skip('should set self(battle-stage) from 0 to 1');
+        });
 
-        test.skip('should have poke-menu element');
+        suite('actions when self(battle-stage=1)', function() {
+          test.skip('should log: enemyName wants to fight!');
 
-        test.skip('should have player poke-player element');
+          suite('actions for poke-player(next-pokemon) event', function() {
+            test.skip('should update respective poke-battleside pokemon');
+            test.skip('should update poke-menu moves');
+            test.skip('should update respective poke-battleside pokemon');
+          });
 
-        test.skip('should have enemy poke-player element');
+          suite('actions for poke-battleside(stats-updated)', function() {
+            test.skip('should show poke-menu when both poke-battleside stats are defined');
+          });
 
-        test.skip('should have poke-search element');
+          suite('actions for poke-menu(use-move-action)', function() {
+            test.skip('should hide poke-menu');
+            test.skip('should attack the pokemon-battleside with the lowest speed stat');
+          });
 
-        test.skip('should create a poke-battleside for each player');
+          suite('actions for poke-log response', function() {
+            this.skip();
+          });
+        });
 
-        test.skip('should show poke-menu after poke-battleside\'s are in place');
 
         test.skip('should attack the target poke-battleside');
 
         test.skip('should tell to poke-player to change pokemon when a pokemon dies');
 
         test.skip('should update poke-battle pokemon when poke-player pick a pokemon');
-
-        suite('messages', function() {
-          test.skip('should push: enemyName wants to fight!');
-          test.skip('should push: player/enemy sent out pokemonName!');
-          test.skip('should push: Go! pokemonName!');
-          test.skip('should push: pokemonName used moveName!');
-          test.skip('should push: Enemy pokemonName fainted! when a pokemon dies');
-          test.skip('should push: pokemonName used moveName when a move is triggered');
-          test.skip('should push: It\'s super effective! when the move is super effective');
-          test.skip('should push: It\'s not very effective... when the move is not effective');
-          test.skip('should push: But, it failed! when the move fails');
-          test.skip('should push: critical hit! when the move crits');
-          test.skip('should push: pokemonName attack missed! when the move miss');
-          test.skip('should push: pokemonName restored life! when the move restore hp');
-          test.skip('should push: pokemonName gained statusName! when the move grants self status');
-          test.skip('should push: Enemy pokemonName statusName fell! when the move remove enemy status');
-          test.skip('should push: Enemy pokemonName paralyzed! It may\nnot attack! when the move paralyzes enemy');
-          test.skip('should push: pokemonName paralyzed! It may\nnot attack! when the move paralyzes enemy');
-          test.skip('should push question: enemyName is about to use pokeName\nWill playerName change pokemon?');
-          test.skip('should push question: enemyName defeated playerName! when player lose');
-          test.skip('should push question: playerName defeated enemyName! when player wins');
-        });
       });
     </script>
   </body>
