@@ -5,6 +5,7 @@
 <dom-module id="poke-list">
   <template>
     <style include="shared-styles"></style>
+    Selected [[_getSelectedCount(selected)]] random pokemons
   </template>
 
   <script>
@@ -13,7 +14,7 @@
       properties: {
         pokeIndex: Object,
         selected: {
-          type: Object,
+          type: Array,
           readOnly: true,
           notify: true
         },
@@ -21,10 +22,27 @@
           type: Boolean,
           value: false
         }
-      }
-      ready: function() {
-        //temporary pokemons
-        
+      },
+      observers: [
+        '_previewPick(pokeIndex)'
+      ],
+      _getSelectedCoutn: function(selected) {
+        return selected.length;
+      },
+      _previewPick: function() {
+        //pick 6 random pokemons
+        for(var i = 0; i<6; i++) {
+          var index = Math.floor(Math.random() * 151);
+          this._sendPokeRequest(this.pokeIndex[index]);
+        }
+      },
+      _sendPokeRequest: function(pokeIndex) {
+        var req = new XMLHttpRequest();
+        req.onload = function() {
+          this.push('selected', JSON.parse(req.response));
+        }.bind(this);
+        req.open('GET', pokeIndex.url);
+        req.send();
       }
     });
   </script>
