@@ -1,40 +1,125 @@
 <!doctype html>
 
 <html>
-  <head>
-    <title>poke-search test</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../../web-component-tester/browser.js"></script>
+<head>
+  <title>poke-search test</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../../src/poke-search/poke-search.html">
-  </head>
-  <body>
+  <link rel="import" href="../../src/poke-search/poke-search.html">
+</head>
+<body>
 
-    <test-fixture id="basic">
-      <template>
-        <poke-search></poke-search>
-      </template>
-    </test-fixture>
+  <test-fixture id="basic">
+    <template>
+      <poke-search></poke-search>
+    </template>
+  </test-fixture>
 
-    <script>
-      suite('poke-search', function() {
-        var element;
-        setup (function() {
-          element = fixture('basic');
-        });
+  <script>
+  suite('poke-search', function() {
+    var element;
+    setup (function() {
+      element = fixture('basic');
+    });
 
-        test('instantiating the element works', function() {
-          var element = fixture('basic');
-          assert.equal(element.is, 'poke-search');
-        });
+    test('instantiating the element works', function() {
+      assert.equal(element.is, 'poke-search');
+    });
 
-        test.skip('should show dialog when show is called');
-        test.skip('should hide dialog when hide is called');
-        test.skip('should show pokemons list');
-        test.skip('trigger pokemons-pick when pokemons are picked');
+    suite('should open dialog and set person', function() {
+      var person;
+      var setAssert;
+
+      setup(function() {
+        setAssert = function(done) {
+          element.$.dialog.addEventListener('opened-changed', function() {
+            assert.equal(element.person, person || 'ENEMY');
+            assert.isTrue(element.$.dialog.opened);
+            done();
+          });
+        };
       });
-    </script>
-  </body>
+
+      test('when call open without arguments', function(done) {
+        setAssert(done);
+        element.open();
+      });
+
+      test('when call open with PLAYER', function(done) {
+        person = 'PLAYER';
+        setAssert(done);
+        element.pokemons.enemy = [{}, {}];
+        element.open(person);
+      });
+
+      test('when call open with ENEMY', function(done) {
+        person = 'ENEMY';
+        setAssert(done);
+        element.open(person);
+      });
+    });
+
+    suite('should re-open dialog if no pokes are selected', function() {
+      var whenOpen;
+
+      setup(function() {
+        whenOpen = new Promise(function(resolve, reject) {
+          element.$.dialog.addEventListener('opened-changed', function() {
+            if(element.$.dialog.opened) {
+              resolve();
+            } else {
+              reject();
+            }
+          });
+        });
+      });
+
+      test('for ENEMY open call', function(done) {
+        element.open('ENEMY');
+        whenOpen.then(done).catch(done);
+        element._setPokes(); // Accept
+        element.$.dialog.close(); // Close dialog
+      });
+
+      test('for PLAYER open call', function(done) {
+        element.open('PLAYER');
+        whenOpen.then(done).catch(done);
+        element._setPokes(); // Accept
+        element.$.dialog.close(); // Close dialog
+      });
+    });
+
+    test('should trigger pokemons-ready', function(done) {
+      var enemyPokes = [{enemy: 'foo'}, {enemy: 'foo'}];
+      var playerPokes = [{player: 'foo'}, {player: 'foo'}];
+
+      setup(function() {
+        element.addEventListener('pokemons-changed', function() {
+          element.selectedPokes = playerPokes;
+          element.person = 'PLAYER';
+          element._setPokes();
+        });
+
+        element.person = 'ENEMY';
+        element.selectedPokes = enemyPokes;
+        element._setPokes(); // Accept
+        element.$.dialog.close(); // Close
+      });
+
+      element.addEventListener('pokemons-ready', function() {
+        assert.equal(element.pokemons.enemy, enemyPokes);
+        assert.equal(element.pokemons.player, playerPokes);
+        done();
+      });
+    });
+
+
+    test.skip('should show pokemons list');
+    test.skip('trigger pokemons-pick when pokemons are picked');
+  });
+  </script>
+</body>
 </html>
