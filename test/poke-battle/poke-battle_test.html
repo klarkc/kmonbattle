@@ -39,12 +39,14 @@
             assert.equal(element.battleStage, 0);
           });
 
-          test.skip('should have poke-search element');
+          test('should have poke-search element', function() {
+            assert.lengthOf(element.querySelectorAll('poke-search'), 1);
+          });
+
           test.skip('should have poke-log element');
           test.skip('should have poke-menu element');
           test.skip('should have player poke-player element');
           test.skip('should have enemy poke-player element');
-          test.skip('should have poke-search element');
           test.skip('should create a poke-battleside for each player');
         });
 
@@ -70,7 +72,13 @@
         });
 
         test.skip('should configure the battle after ready');
-        test.skip('should show poke-search on configure');
+
+        test('should show poke-search on configure', function() {
+          var spy = sinon.spy(element.$.search, 'open');
+          element.configure();
+          sinon.assert.calledOnce(spy);
+          spy.restore();
+        });
 
         suite('actions for poke-search(pokemons-picked) event', function() {
           test.skip('should hide poke-search');
