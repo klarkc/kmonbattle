@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../poke-monster/poke-monster.html">
+<link rel="import" href="../poke-battleside/poke-battleside.html">
 
 <dom-module id="poke-player">
   <template>
@@ -11,7 +11,7 @@
       }
     </style>
     <poke-status></poke-status>
-    <poke-monster pokemon-id="1"></poke-monster>
+    <poke-battleside></poke-battleside>
   </template>
 
   <script>
@@ -19,7 +19,8 @@
 
       is: 'poke-player',
       properties: {
-        nickname: String
+        nickname: String,
+        ai: Boolean
       }
     });
   </script>
