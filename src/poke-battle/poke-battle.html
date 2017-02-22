@@ -1,11 +1,11 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../poke-player/poke-player.html">
 <link rel="import" href="../poke-search/poke-search.html">
 
 <link rel="import" href="../shared-styles.html">
 
-<dom-module id="poke-battle">
+</head><body><dom-module id="poke-battle">
   <template>
     <style include="shared-styles">
       :host {
@@ -17,22 +17,6 @@
     <content></content>
   </template>
 
-  <script>
-    Polymer({
-
-      is: 'poke-battle',
-      properties: {
-        apiUrl: {
-          type: String,
-          value: 'https://pokeapi.co/api/v2'
-        }
-      },
-      ready: function() {
-        this.configure();
-      },
-      configure: function() {
-        this.$.search.open();
-      }
-    });
-  </script>
+  <script>Polymer({is:"poke-battle",properties:{apiUrl:{type:String,value:"https://pokeapi.co/api/v2"}},ready:function(){this.configure()},configure:function(){this.$.search.open()}});</script>
 </dom-module>
+</body></html>

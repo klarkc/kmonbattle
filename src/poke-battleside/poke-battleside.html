@@ -1,43 +1,18 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <link rel="import" href="../shared-styles.html">
 
-<dom-module id="poke-battleside">
+</head><body><dom-module id="poke-battleside">
   <template>
     <style include="shared-styles"></style>
-    <iron-ajax auto url="[[_getMonsterUrl(apiUrl, pokemonId)]]" last-response="{{pokemon}}"></iron-ajax>
-    <iron-ajax auto url="[[_getFormUrl(pokemon.forms)]]" last-response="{{pokemonForm}}"></iron-ajax>
+    <iron-ajax auto="" url="[[_getMonsterUrl(apiUrl, pokemonId)]]" last-response="{{pokemon}}"></iron-ajax>
+    <iron-ajax auto="" url="[[_getFormUrl(pokemon.forms)]]" last-response="{{pokemonForm}}"></iron-ajax>
     <iron-image src="[[pokemonForm.sprites.front_default]]" id="sprite"></iron-image>
   </template>
 
-  <script>
-    Polymer({
-
-      is: 'poke-battleside',
-      properties: {
-        apiUrl: {
-          type: String,
-          value: 'https://pokeapi.co/api/v2'
-        },
-        pokemonId: Number,
-        pokemon: {
-          type: Object,
-          notify: true
-        },
-        pokemonForm: {
-          type: Object,
-          notify: true
-        }
-      },
-      _getMonsterUrl: function(apiUrl, id) {
-        return apiUrl + '/pokemon/' + id + '/';
-      },
-      _getFormUrl: function(forms) {
-        return forms[0].url;
-      }
-    });
-  </script>
+  <script>Polymer({is:"poke-battleside",properties:{apiUrl:{type:String,value:"https://pokeapi.co/api/v2"},pokemonId:Number,pokemon:{type:Object,notify:!0},pokemonForm:{type:Object,notify:!0}},_getMonsterUrl:function(e,o){return e+"/pokemon/"+o+"/"},_getFormUrl:function(e){return e[0].url}});</script>
 </dom-module>
+</body></html>

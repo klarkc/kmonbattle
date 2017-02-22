@@ -1,10 +1,10 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../poke-battleside/poke-battleside.html">
 
 <link rel="import" href="../shared-styles.html">
 
-<dom-module id="poke-player">
+</head><body><dom-module id="poke-player">
   <template>
     <style include="shared-styles">
       :host {
@@ -16,14 +16,6 @@
     <poke-battleside></poke-battleside>
   </template>
 
-  <script>
-    Polymer({
-
-      is: 'poke-player',
-      properties: {
-        nickname: String,
-        ai: Boolean
-      }
-    });
-  </script>
+  <script>Polymer({is:"poke-player",properties:{nickname:String,ai:Boolean}});</script>
 </dom-module>
+</body></html>

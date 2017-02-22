@@ -1,25 +1,20 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../poke-battle/poke-battle.html">
 <link rel="import" href="../poke-player/poke-player.html">
 
 <link rel="import" href="../shared-styles.html">
 
-<dom-module id="poke-app">
+</head><body><dom-module id="poke-app">
   <template>
     <style include="shared-styles"></style>
     <poke-battle>
-      <poke-player id="enemy" ai></poke-player>
+      <poke-player id="enemy" ai=""></poke-player>
       <poke-player id="player"></poke-player>
       <poke-log></poke-log>
     </poke-battle>
   </template>
 
-  <script>
-    Polymer({
-
-      is: 'poke-app'
-
-    });
-  </script>
+  <script>Polymer({is:"poke-app"});</script>
 </dom-module>
+</body></html>

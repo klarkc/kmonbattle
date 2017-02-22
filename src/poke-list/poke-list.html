@@ -1,8 +1,8 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../shared-styles.html">
 
-<dom-module id="poke-list">
+</head><body><dom-module id="poke-list">
   <template>
     <style include="shared-styles">
     ul li span {
@@ -10,7 +10,7 @@
     }
     </style>
     <p>
-      Sorry, still in construction..<br/>
+      Sorry, still in construction..<br>
       Random loading pokemons...
     </p>
     <ul>
@@ -20,51 +20,6 @@
     </ul>
   </template>
 
-  <script>
-    Polymer({
-      is: 'poke-list',
-      properties: {
-        pokeIndex: Object,
-        selected: {
-          type: Array,
-          notify: true
-        },
-        selectable: {
-          type: Boolean,
-          value: false
-        }
-      },
-      observers: [
-        '_previewPokes(pokeIndex, selected)'
-      ],
-      _getSelectedCount: function(selected) {
-        return selected.length;
-      },
-      _previewPokes: function() {
-        if(this.pokeIndex.length < 151) return;
-
-        // reject multiple requests
-        if(this.loading) return;
-        this.loading = true;
-
-        //pick 6 random pokemons
-        for(var i = 0; i<6; i++) {
-          var index = Math.floor(Math.random() * 151);
-          this._sendPokeRequest(this.pokeIndex[index]);
-        }
-      },
-      _sendPokeRequest: function(pokeIndex) {
-        var req = new XMLHttpRequest();
-        req.onload = function() {
-          this.push('selected', JSON.parse(req.response));
-          if(this.selected.length >= 6) this.loading = false;
-        }.bind(this);
-        req.open('GET', pokeIndex.url);
-        req.send();
-      },
-      _getIndex: function(index) {
-        return index + 1;
-      }
-    });
-  </script>
+  <script>Polymer({is:"poke-list",properties:{pokeIndex:Object,selected:{type:Array,notify:!0},selectable:{type:Boolean,value:!1}},observers:["_previewPokes(pokeIndex, selected)"],_getSelectedCount:function(e){return e.length},_previewPokes:function(){if(!(this.pokeIndex.length<151||this.loading)){this.loading=!0;for(var e=0;e<6;e++){var t=Math.floor(151*Math.random());this._sendPokeRequest(this.pokeIndex[t])}}},_sendPokeRequest:function(e){var t=new XMLHttpRequest;t.onload=function(){this.push("selected",JSON.parse(t.response)),this.selected.length>=6&&(this.loading=!1)}.bind(this),t.open("GET",e.url),t.send()},_getIndex:function(e){return e+1}});</script>
 </dom-module>
+</body></html>
