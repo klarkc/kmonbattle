@@ -21,7 +21,7 @@
       exit-animation="fade-out-animation"
       id="dialog">
       <h2>Please, select {{person}} pokemons</h2>
-      <poke-list pokeIndex={{pokeIndex}} selected={{selectedPokes}} selectable></poke-list>
+      <poke-list id="pokeList" poke-index={{pokeIndex}} selected={{selectedPokes}} selectable></poke-list>
       <div class="buttons">
         <paper-button dialog-confirm autofocus on-tap="_setPokes">Accept</paper-button>
       </div>
@@ -53,12 +53,19 @@
         }
       },
       listeners: {
-        'dialog.opened-changed': '_checkDone'
+        'dialog.opened-changed': '_checkDone',
+        'pokeList.selected-changed': '_refreshDialog'
+      },
+      observers: [
+        '_loadPokeIndex(apiUrl)'
+      ],
+      _refreshDialog: function() {
+        this.$.dialog.refit();
+        this.$.dialog.center();
       },
       open: function(person) {
         this.selectedPokes = [];
         this.person = person || 'ENEMY';
-        this._loadPokeIndex();
         this.$.dialog.open();
       },
       _setPokes: function() {
