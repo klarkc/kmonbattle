@@ -32,14 +32,6 @@
           assert.equal(element.is, 'poke-monster');
         });
 
-        test('should load pokemon', function(done) {
-          element = fixture('basic-id1');
-          element.addEventListener('pokemon-changed', function() {
-            assert.equal(element.pokemon.name, "bulbasaur");
-            done();
-          });
-        });
-
         test('should load pokemonForm', function(done) {
           element = fixture('basic-id1');
           element.addEventListener('pokemon-form-changed', function() {
@@ -56,6 +48,9 @@
             done();
           });
         });
+
+        test.skip('should attack the enemy pokemon when attack is called');
+        test.skip('should trigger stats-changed when stats are updated');
       });
     </script>
   </body>
