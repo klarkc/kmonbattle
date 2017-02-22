@@ -29,6 +29,10 @@
       assert.equal(element.is, 'poke-search');
     });
 
+    test('apiUrl should be right', function() {
+      assert.equal(element.apiUrl, 'http://pokeapi.co/api/v2');
+    });
+
     suite('should open dialog and set person', function() {
       var person;
       var setAssert;
@@ -96,26 +100,31 @@
       var enemyPokes = [{enemy: 'foo'}, {enemy: 'foo'}];
       var playerPokes = [{player: 'foo'}, {player: 'foo'}];
 
-      setup(function() {
-        element.addEventListener('pokemons-changed', function() {
-          element.selectedPokes = playerPokes;
-          element.person = 'PLAYER';
-          element._setPokes();
-        });
-
-        element.person = 'ENEMY';
-        element.selectedPokes = enemyPokes;
-        element._setPokes(); // Accept
-        element.$.dialog.close(); // Close
-      });
-
       element.addEventListener('pokemons-ready', function() {
         assert.equal(element.pokemons.enemy, enemyPokes);
         assert.equal(element.pokemons.player, playerPokes);
         done();
       });
+
+      element.addEventListener('pokemons-changed', function() {
+        element.selectedPokes = playerPokes;
+        element.person = 'PLAYER';
+        element._setPokes(); // Simulate accept
+      });
+
+      element.person = 'ENEMY';
+      element.selectedPokes = enemyPokes;
+      element._setPokes(); // Simulate accept
+      element._checkDone(); // Simulate close event
     });
 
+    test('should load pokeIndex', function(done) {
+      element.addEventListener('poke-index-changed', function(evt) {
+        assert.lengthOf(element.pokeIndex, 151);
+        done();
+      });
+      element._loadPokeIndex();
+    });
 
     test.skip('should show pokemons list');
     test.skip('trigger pokemons-pick when pokemons are picked');

@@ -19,7 +19,7 @@
       exit-animation="fade-out-animation"
       id="dialog">
       <h2>Please, select {{person}} pokemons</h2>
-      <poke-list pokeIndex={{pokemons}} selected={{selectedPokes}} selectable></poke-list>
+      <poke-list pokeIndex={{pokeIndex}} selected={{selectedPokes}} selectable></poke-list>
       <div class="buttons">
         <paper-button dialog-confirm autofocus on-tap="_setPokes">Accept</paper-button>
       </div>
@@ -30,11 +30,23 @@
     Polymer({
       is: 'poke-search',
       properties: {
+        apiUrl: {
+          type: String,
+          value: 'http://pokeapi.co/api/v2'
+        },
         pokemons: {
           type: Object,
           notify: true,
           value: function() {
             return {enemy: [], player: []};
+          }
+        },
+        pokeIndex: {
+          type: Array,
+          notify: true,
+          readOnly: true,
+          value: function() {
+            return [];
           }
         }
       },
@@ -44,19 +56,20 @@
       open: function(person) {
         this.selectedPokes = [];
         this.person = person || 'ENEMY';
+        this._loadPokeIndex();
         this.$.dialog.open();
       },
       _setPokes: function() {
         if(!this.selectedPokes) return;
-
         if(this.person === 'ENEMY') {
           this.set('pokemons.enemy', this.selectedPokes);
         } if(this.person === 'PLAYER') {
           this.set('pokemons.player', this.selectedPokes);
         }
       },
-      _checkDone: function(evt) {
+      _checkDone: function() {
         if( !this.pokemons ) return;
+        console.trace(JSON.stringify(this.pokemons));
 
         if( this.pokemons.enemy.length <1 ) {
           this.open('ENEMY');
@@ -69,6 +82,14 @@
         }
 
         this.fire('pokemons-ready');
+      },
+      _loadPokeIndex: function() {
+        var req = new XMLHttpRequest();
+        req.onload = function() {
+          this._setPokeIndex(JSON.parse(req.response).results);
+        }.bind(this);
+        req.open('GET', this.apiUrl + '/pokemon/?limit=151');
+        req.send();
       }
     });
   </script>

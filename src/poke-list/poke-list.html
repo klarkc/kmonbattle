@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="poke-list">
+  <template>
+    <style include="shared-styles"></style>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'poke-list',
+      properties: {
+        pokeIndex: Object,
+        selected: {
+          type: Object,
+          readOnly: true,
+          notify: true
+        },
+        selectable: {
+          type: Boolean,
+          value: false
+        }
+      }
+      ready: function() {
+        //temporary pokemons
+        
+      }
+    });
+  </script>
+</dom-module>
