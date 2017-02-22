@@ -4,8 +4,20 @@
 
 <dom-module id="poke-list">
   <template>
-    <style include="shared-styles"></style>
-    Selected [[_getSelectedCount(selected)]] random pokemons
+    <style include="shared-styles">
+    ul li span {
+      text-transform: capitalize;
+    }
+    </style>
+    <p>
+      Sorry, still in construction..<br/>
+      Random loading pokemons...
+    </p>
+    <ul>
+      <template is="dom-repeat" items="[[selected]]" index-as="index">
+        <li>Loaded [[_getIndex(index)]] of 6: <span>[[item.name]]</span></li>
+      </template>
+    </ul>
   </template>
 
   <script>
@@ -15,7 +27,6 @@
         pokeIndex: Object,
         selected: {
           type: Array,
-          readOnly: true,
           notify: true
         },
         selectable: {
@@ -24,12 +35,18 @@
         }
       },
       observers: [
-        '_previewPick(pokeIndex)'
+        '_previewPokes(pokeIndex, selected)'
       ],
-      _getSelectedCoutn: function(selected) {
+      _getSelectedCount: function(selected) {
         return selected.length;
       },
-      _previewPick: function() {
+      _previewPokes: function() {
+        if(this.pokeIndex.length < 151) return;
+
+        // reject multiple requests
+        if(this.loading) return;
+        this.loading = true;
+
         //pick 6 random pokemons
         for(var i = 0; i<6; i++) {
           var index = Math.floor(Math.random() * 151);
@@ -40,9 +57,13 @@
         var req = new XMLHttpRequest();
         req.onload = function() {
           this.push('selected', JSON.parse(req.response));
+          if(this.selected.length >= 6) this.loading = false;
         }.bind(this);
         req.open('GET', pokeIndex.url);
         req.send();
+      },
+      _getIndex: function(index) {
+        return index + 1;
       }
     });
   </script>
