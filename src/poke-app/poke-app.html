@@ -3,13 +3,11 @@
 <link rel="import" href="../poke-battle/poke-battle.html">
 <link rel="import" href="../poke-player/poke-player.html">
 
+<link rel="import" href="../shared-styles.html">
+
 <dom-module id="poke-app">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
+    <style include="shared-styles"></style>
     <poke-battle>
       <poke-player id="enemy" ai></poke-player>
       <poke-player id="player"></poke-player>

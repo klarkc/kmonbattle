@@ -3,13 +3,11 @@
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
+<link rel="import" href="../shared-styles.html">
+
 <dom-module id="poke-battleside">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
+    <style include="shared-styles"></style>
     <iron-ajax auto url="[[_getMonsterUrl(apiUrl, pokemonId)]]" last-response="{{pokemon}}"></iron-ajax>
     <iron-ajax auto url="[[_getFormUrl(pokemon.forms)]]" last-response="{{pokemonForm}}"></iron-ajax>
     <iron-image src="[[pokemonForm.sprites.front_default]]" id="sprite"></iron-image>
