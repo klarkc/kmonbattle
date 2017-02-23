@@ -47,11 +47,27 @@
           value: 0
         }
       },
+      observers: [
+        '_runStage(battleStage)'
+      ],
       ready: function() {
-        this.configure();
+        this.log = this.querySelector('poke-log');
+        if(!this.log) throw Error('Missing poke-log');
+        this.enemy = this.querySelector('poke-player[ai]');
+        if(!this.enemy) throw Error('Missing poke-player for enemy');
+        this.player = this.querySelector('poke-player:not([ai])');
+        if(!this.player) throw Error('Missing poke-player for player');
       },
-      configure: function() {
+      _runStage: function(stage) {
+        if(stage === 0) this._configure();
+        if(stage === 1) this._executePlayerTurn();
+      },
+      _configure: function() {
         this.$.search.open();
+        this.stage = 1;
+      },
+      _executePlayerTurn: function() {
+
       }
     });
   </script>
