@@ -4,14 +4,32 @@
 
 <dom-module id="poke-log">
   <template>
-    <style include="shared-styles"></style>
+    <style include="shared-styles">
+      :host {
+        width: 100%;
+        height: calc(100% / 3);
+        visibility: hidden;
+        @apply(--poke-border);
+      }
+
+      .visible {
+        visibility: visible;
+      }
+    </style>
+    <div class="message"></div>
   </template>
 
   <script>
     Polymer({
-
       is: 'poke-log',
-      properties: {}
+      properties: {
+        msgs: {
+          type: Array,
+          value: function() {
+            return [];
+          }
+        }
+      }
 
     });
   </script>

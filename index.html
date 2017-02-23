@@ -7,17 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    
     <link rel="import" href="src/poke-app/poke-app.html">
 
-    <style>
-    /* Full bleed */
-    body {
-      background: #94c8f7 url(assets/img/bg1.jpg) repeat-x bottom;
-      margin: 0;
-      height: 100vh;
-    }
-    </style>
-
+    <!-- import the shared styles  -->
+    <link rel="import" href="src/shared-styles.html">
+    <!-- include the shared styles -->
+    <style is="custom-style" include="shared-styles"></style>
   </head>
   <body>
     <poke-app></poke-app>

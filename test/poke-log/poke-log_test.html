@@ -26,11 +26,17 @@
         });
 
         test('instantiating the element works', function() {
-          var element = fixture('basic');
           assert.equal(element.is, 'poke-log');
         });
 
-        test.skip('should show a message when msgs is pushed');
+        test('element should have empty msgs', function() {
+          assert.lengthOf([], element.msgs);
+        });
+
+        test('should show a message when msgs is pushed', function() {
+          this.skip();
+        });
+
         test.skip('should show a message with \\n when msgs is pushed');
         test.skip('should show a question with yes no response when a question msgs is pushed');
         test.skip('should trigger response when a question is aswered');
