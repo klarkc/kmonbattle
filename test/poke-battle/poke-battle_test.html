@@ -39,6 +39,11 @@
             assert.equal(element.battleStage, 0);
           });
 
+          test('should reflect batle-stage attribute on element parameter', function() {
+            element.battleStage = 1;
+            assert.equal(element.getAttribute('battle-stage'), '1');
+          });
+
           test('should have poke-search element', function() {
             assert.lengthOf(element.querySelectorAll('poke-search'), 1);
           });
@@ -88,11 +93,6 @@
 
         suite('actions when self(battle-stage=1)', function() {
           test.skip('should log: enemyName wants to fight!');
-
-          test('should add class inBattle when enter battle-stage 1', function() {
-            element.configure();
-            assert.include(element.className, 'inBattle');
-          });
 
           suite('actions for poke-player(next-pokemon-changed) event', function() {
             test.skip('should update respective poke-battleside pokemon');

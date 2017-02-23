@@ -15,12 +15,16 @@
         height: 100%;
         max-width: 640px;
         max-height: 480px;
-        background-color: #000;
       }
 
-      .inBattle {
-        background-color: #FFF;
+      :host[battle-stage='0'] {
+        background-color: #000;
+        transition: background-color 1s;
+      }
 
+      :host[battle-stage='1'] {
+        background-color: #FFF;
+        transition: background-color 1s;
       }
     </style>
     <poke-search id="search"></poke-search>
@@ -35,6 +39,12 @@
         apiUrl: {
           type: String,
           value: 'https://pokeapi.co/api/v2'
+        },
+        battleStage: {
+          type: Number,
+          notify: true,
+          reflectToAttribute: true,
+          value: 0
         }
       },
       ready: function() {
